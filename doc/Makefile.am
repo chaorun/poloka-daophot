@@ -1,4 +1,0 @@
-CLEANFILES = *~
-MAINTAINERCLEANFILES = Makefile.in
-
-EXTRA_DIST = README.db Doxyfile.in
