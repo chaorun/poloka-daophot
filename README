@@ -3,6 +3,6 @@ poloka-dao
 
 poloka is a software package to process astronomical
 images. poloka-dao is a module of the poloka suite to
-deal with daophot style i/o
+deal with DAOPHOT/ALLFRAME format input / output.
 
 To install poloka-dao, see the INSTALL file.

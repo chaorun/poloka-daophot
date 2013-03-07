@@ -8,8 +8,10 @@
 #include <poloka/fileutils.h>
 #include <poloka/fitsimage.h>
 
-static void usage(const char* prog) {
-  cerr << prog << " <file with id ra dec mag> <dbimage>...<dbimage>\n";
+static void usage(const char* progname) {
+  cerr << "Usage: " << progname << " <file with id ra dec mag> <dbimage>...<dbimage>\n"
+       << "Create a star file planted.lst to be added with DAOPHOT/ADDSTAR\n"
+       << "Input FILE format: ID RA DEC MAG\n\n";
   exit(EXIT_FAILURE);
 }
 
@@ -52,7 +54,6 @@ struct ImageAddStar {
 
     double zp = rim->AnyZeroPoint();
     Frame frame = rim->UsablePart();
-    cout << " addstars_dao: zeropoint = " << zp << endl;
     DaoStarList daostars;
     int i = 1;
     for (list<genstar>::iterator it=stars.begin(); it != stars.end(); ++it) {
@@ -72,6 +73,7 @@ struct ImageAddStar {
 };
 
 int main( int nargs, char **args){
+
   if (nargs <=1) usage(args[0]);
 
   ImageAddStar imAddStar(args[1]);

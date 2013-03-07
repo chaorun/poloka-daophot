@@ -1,12 +1,13 @@
 #include <poloka/daophotio.h>
 
-static void usage(char *progName) {
-  cerr << progName << "[OPTION] DBIMAGE...\n"
-       << "Setup a DBIMAGE to run DAOPHOT:\n"
+static void usage(char *progname) {
+  cerr << "Usage: " << progname << "[OPTION] DBIMAGE...\n"
+       << "Setup a DBIMAGE to run DAOPHOT\n\n"
        << " -d DIR: write in directory DIR instead of the dbimage directory\n"
        << " - write <dbimage>.fits with sky level added\n"
        << " - write daophot.opt, allstar.opt, photo.opt standard daophot option files\n"
-       << " - write <dbimage>.als from se.list\n";
+       << " - write <dbimage>.als from se.list\n\n";
+  exit(EXIT_FAILURE);
 }
 
 struct doDaoSetup {
@@ -27,7 +28,7 @@ struct doDaoSetup {
 
 int main(int argc, char **argv) {
 
-  if (argc < 2) {  usage(argv[0]); return EXIT_FAILURE; }
+  if (argc < 2) usage(argv[0]);
 
   list<string> imlist;
   doDaoSetup daosetup;
@@ -39,9 +40,8 @@ int main(int argc, char **argv) {
       continue;
     }
     if (arg[1] == 'd') { daosetup.Dir = argv[++i] ; continue; }
-    cerr << " Error: unknown option: " << arg << endl;
+    cerr << argv[0] << ": unknown option: " << arg << endl;
     usage(argv[0]); 
-    return EXIT_FAILURE;
   }
 
   for_each(imlist.begin(), imlist.end(), daosetup);
